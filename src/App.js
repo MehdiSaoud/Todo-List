@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import Card from "./Component/Card";
+import Form from "./Component/Form";
+import {CardList} from "./Data/CardList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+
+    const [cards, setCards] = useState(CardList);
+
+    return (
+        <>
+            <Form setCards={setCards} cards={cards}/>
+            <div className='row row-cols-2 row-cols-md-4 g-2 p-5'>
+                {cards.map(
+                    card => (
+                        <Card cards={cards} setCards={setCards} title={card.title} description={card.description} state={card.state} key={card.id} id={card.id}/>
+                    )
+                )}
+            </div>
+        </>
+    )
 }
-
-export default App;
